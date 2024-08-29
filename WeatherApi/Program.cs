@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace WeatherApi
 {
@@ -12,7 +14,13 @@ namespace WeatherApi
     {
         static async Task Main(string[] args)
         {
-            string apiKey = "";
+            //Get API key
+            //TODO change it to a class in a separated file.  
+            string fileKeyPath = "weatherKey.txt";
+            string apiKey = File.ReadAllText(fileKeyPath);
+            apiKey = apiKey.Trim();
+
+            //apiKey = "";
             string cityName = "Toronto";
             int limit = 5;
             string apiUrlLatLon = $"http://api.openweathermap.org/geo/1.0/direct?q={cityName}&limit={limit}&appid={apiKey}";
