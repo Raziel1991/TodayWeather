@@ -14,13 +14,12 @@ namespace WeatherApi
     {
         static async Task Main(string[] args)
         {
-            //Get API key
-            //TODO change it to a class in a separated file.  
+            //Get API key from Class
             string fileKeyPath = "weatherKey.txt";
-            string apiKey = File.ReadAllText(fileKeyPath);
-            apiKey = apiKey.Trim();
+            GetApiKey getApiKey = new GetApiKey(fileKeyPath);
+            string apiKey = getApiKey.ReadAPIKey();
+            
 
-            //apiKey = "";
             string cityName = "Toronto";
             int limit = 5;
             string apiUrlLatLon = $"http://api.openweathermap.org/geo/1.0/direct?q={cityName}&limit={limit}&appid={apiKey}";
